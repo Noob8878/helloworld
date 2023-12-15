@@ -1,0 +1,39 @@
+cmake_minimum_required(VERSION 3.10)
+project(MyOpenCVProject)
+
+#包含头文件
+set(opencv_include "E:/Alligps/igps101_0626/code/utils/opencv-3.2.0/include")
+set(opencv_lib "E:/Alligps/igps101_0626/code/utils/opencv-3.2.0/lib")
+set(opencv_bin "E:/Alligps/igps101_0626/code/utils/opencv-3.2.0/bin")
+
+include_directories(${opencv_include})
+# 添加一个可执行文件
+
+add_executable(MyExecutable main.cpp Point.cpp Point.h)
+
+if(CMAKE_BUILD_TYPE MATCHES Debug)
+  # 链接Debug库
+  target_link_libraries(MyExecutable 
+     "${opencv_lib}/debug/opencv_calib3d320d.lib"
+     "${opencv_lib}/debug/opencv_core320d.lib"
+     "${opencv_lib}/debug/opencv_features2d320d.lib"
+     "${opencv_lib}/debug/opencv_flann320d.lib"
+     "${opencv_lib}/debug/opencv_core320d.lib"
+     "${opencv_lib}/debug/opencv_core320d.lib"
+     "${opencv_lib}/debug/opencv_core320d.lib"
+     "${opencv_lib}/debug/opencv_core320d.lib"
+      # Debug版本的库文件
+    # 其他Debug版本的OpenCV库文件
+  )
+else()
+  # 链接Release库
+  target_link_libraries(MyExecutable 
+     "${opencv_lib}/release/opencv_core320.lib" 
+     "${opencv_lib}/release/opencv_highgui320.lib" 
+     "${opencv_lib}/release/opencv_imgcodecs320.lib" 
+     "${opencv_lib}/release/opencv_core320.lib" 
+     "${opencv_lib}/release/opencv_core320.lib" 
+     # Release版本的库文件
+    # 其他Release版本的OpenCV库文件
+  )
+endif()
